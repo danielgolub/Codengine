@@ -6,6 +6,7 @@
 
 $_CONFIG = array(
 	"db" => array(
+		"enabled" => true,
 		"hostname" => "localhost",
 		"username" => "root",
 		"password" => "",

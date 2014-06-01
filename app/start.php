@@ -22,7 +22,8 @@ foreach ($base as $val)
 }
 
 $Sec = new Security;
-$DB = new Database($_CONFIG['db']['host'], $_CONFIG['db']['username'], $_CONFIG['db']['password'], $_CONFIG['db']['dbname']);
+if($_CONFIG['db']['enabled'] === true)
+	$DB = new Database($_CONFIG['db']['hostname'], $_CONFIG['db']['username'], $_CONFIG['db']['password'], $_CONFIG['db']['dbname']);
 $Upload = new Upload($_CONFIG);
 
 $controllers = scandir('app/controllers');
