@@ -11,7 +11,8 @@ $_CONFIG = array(
 		"password" => "",
 		"dbname" => "test"
 	),
-	"route_controller_default" => "welcome"
+	"route_controller_default" => "welcome",
+	"route_enhanced_mode" => true,
 );
 
 ?>
