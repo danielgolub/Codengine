@@ -44,6 +44,18 @@ class Upload
 		else
 			return 'file type is not acceptable';
 	}
+
+	public function delete($file)
+	{
+		if(file_exists($file))
+		{
+			unlink($file);
+			return 'success';
+		}
+		
+		else
+			return 'error';
+	}
 }
 
 ?>
