@@ -4,6 +4,9 @@
  * FilePath: app/base/View/View.base.class
 */
 
+define("URL", $_CONFIG['url']);
+define("ROUTE_ENHANCED_MODE", $_CONFIG['route_enhanced_mode']);
+
 class View
 {
 	public static function forge($location, $data = NULL, $template = true)
@@ -23,7 +26,7 @@ class View
 		$msg = <<<html
 
 <div class="alert alert-danger">
-	<h4>שגיאה התרחשה</h4>
+	<h4>An error occurred</h4>
 	{$str}
 </div>
 
@@ -36,7 +39,7 @@ html;
 		$msg = <<<html
 
 <div class="alert alert-success">
-	<h4>הפעולה התבצעה בהצלחה</h4>
+	<h4>Success!</h4>
 	{$str}
 </div>
 <meta http-equiv="refresh" content="3;" />
@@ -62,9 +65,13 @@ html;
 			$content = '';
 			foreach ($items as $val)
 			{
+				if(ROUTE_ENHANCED_MODE === true)
+					$href = "http://".URL.'/'.$val;
+				else
+					$href = "index.php?page={$val}";
 				$val_capital = ucfirst($val);
 				$content .= <<<html
-	<li><a href="index.php?page={$val}">{$val_capital}</a></li>
+	<li><a href="{$href}">{$val_capital}</a></li>
 
 html;
 			}

@@ -8,10 +8,13 @@
 $base = array(
 	"Database/Database.base.php",
 	"Security/Security.base.php",
-	"View/View.base.php"
+	"View/View.base.php",
 );
 
 REQUIRE_ONCE 'config.php';
+
+if($_CONFIG['upload']['enable'] === true)
+	array_push($base, "Upload/Upload.base.php");
 
 foreach ($base as $val)
 {
@@ -20,6 +23,7 @@ foreach ($base as $val)
 
 $Sec = new Security;
 $DB = new Database($_CONFIG['db']['host'], $_CONFIG['db']['username'], $_CONFIG['db']['password'], $_CONFIG['db']['dbname']);
+$Upload = new Upload($_CONFIG);
 
 $controllers = scandir('app/controllers');
 

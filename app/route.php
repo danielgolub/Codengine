@@ -18,13 +18,21 @@ foreach ($controllers as $val)
 		$name = 'controller_'.$name[0];
 		if($_CONFIG['route_enhanced_mode'] === true)
 		{
-			$request    = $_SERVER['REQUEST_URI'];
+			$request    = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+			$request    = str_replace($_CONFIG['url'], "", $request);
 			$params		= split("/", $request);
+			// print_r($params);
 			$safe_pages = array("example", "welcome");
-			if(in_array(end($params), $safe_pages) && end($params) == $name_before)
+			if(in_array($params[1], $safe_pages) && $params[1] == $name_before)
 			{
 				REQUIRE_ONCE 'controllers/'.$val;
-				${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB ));
+				if($_CONFIG['upload']['enable'] === true)
+					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
+				else
+				{
+					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
+				}
+
 				${$name}->action_index();
 				$loaded++;
 			}
@@ -34,8 +42,21 @@ foreach ($controllers as $val)
 		{
 			if($_GET['page'] == $name_before)
 			{
+				$params_old = $_GET;
+				$params = array();
+				foreach ($params_old as $k => $v)
+				{
+					array_push($params, $v);
+				}
+				array_unshift($params, "");
 				REQUIRE_ONCE 'controllers/'.$val;
-				${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB ));
+				if($_CONFIG['upload']['enable'] === true)
+					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
+				else
+				{
+					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
+				}
+
 				${$name}->action_index();
 				$loaded++;
 			}

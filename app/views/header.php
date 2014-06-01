@@ -4,8 +4,8 @@
 		<title><?php echo $title; ?></title>
 		<meta name="author" content="Daniel Golub - www.DanielGolub.com" />
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="assets/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="http://<?php echo URL; ?>/assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="http://<?php echo URL; ?>/assets/css/base.css" />
 	</head>
 	<body>
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
