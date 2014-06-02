@@ -22,8 +22,14 @@ foreach ($controllers as $val)
 			$request    = str_replace($_CONFIG['url'], "", $request);
 			$params		= split("/", $request);
 			// print_r($params);
-			$safe_pages = array("example", "welcome");
-			if(in_array($params[1], $safe_pages) && $params[1] == $name_before)
+			$safe_pages_old = scandir("app/controllers");
+			$safe_pages_old = array_slice($safe_pages_old, 2);
+			$safe_pages = array();
+			foreach ($safe_pages_old as $value_pages)
+			{
+				$value_pages_new = explode('.', $value_pages);
+				array_push($safe_pages, $value_pages_new[0]);
+			}			if(in_array($params[1], $safe_pages) && $params[1] == $name_before)
 			{
 				REQUIRE_ONCE 'controllers/'.$val;
 				if($_CONFIG['upload']['enable'] === true)
