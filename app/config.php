@@ -16,7 +16,7 @@ $_CONFIG = array(
 	"route_controller_default" => "welcome",
 	"route_enhanced_mode" => true,
 	"upload" => array(
-		"enable" => true,
+		"enabled" => true,
 		"limits" => array(
 			"size"  => 2048, // [MB]
 			"types" => array(
@@ -26,7 +26,11 @@ $_CONFIG = array(
 				"jpeg",
 			)
 		),
-	)
+	),
+	"language" => array(
+		"enabled" => true,
+		"default" => "en"
+	),
 );
 
 ?>

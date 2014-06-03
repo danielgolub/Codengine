@@ -22,16 +22,23 @@ foreach ($controllers as $val)
 			$request    = str_replace($_CONFIG['url'], "", $request);
 			$params		= split("/", $request);
 			// print_r($params);
-			$safe_pages = array("example", "welcome");
+			$safe_pages_old = scandir("app/controllers");
+			$safe_pages_old = array_slice($safe_pages_old, 2);
+			$safe_pages = array();
+			foreach ($safe_pages_old as $value_pages)
+			{
+				$value_pages_new = explode('.', $value_pages);
+				array_push($safe_pages, $value_pages_new[0]);
+			}
 			if(in_array($params[1], $safe_pages) && $params[1] == $name_before)
 			{
 				REQUIRE_ONCE 'controllers/'.$val;
-				if($_CONFIG['upload']['enable'] === true)
+				if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
+					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language ));
+				else if($_CONFIG['upload']['enabled'] === true)
 					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
 				else
-				{
 					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
-				}
 
 				${$name}->action_index();
 				$loaded++;
@@ -50,12 +57,12 @@ foreach ($controllers as $val)
 				}
 				array_unshift($params, "");
 				REQUIRE_ONCE 'controllers/'.$val;
-				if($_CONFIG['upload']['enable'] === true)
+				if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
+					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language ));
+				else if($_CONFIG['upload']['enabled'] === true)
 					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
 				else
-				{
 					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
-				}
 
 				${$name}->action_index();
 				$loaded++;
@@ -68,7 +75,12 @@ foreach ($controllers as $val)
 if($loaded == 0)
 {
 	REQUIRE_ONCE 'controllers/'.$_CONFIG['route_controller_default'].'.controller.php';
-	${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB ));
+	if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
+		${$controller_default_name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language ));
+	else if($_CONFIG['upload']['enabled'] === true)
+		${$controller_default_name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
+	else
+		${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
 	${$controller_default_name}->action_index();
 }
 

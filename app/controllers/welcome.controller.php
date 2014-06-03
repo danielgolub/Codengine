@@ -44,6 +44,7 @@ class controller_welcome
 		else
 		{
 			$data['title'] = 'Codengine &raquo; Welcome :)';
+			$data['strings'] = $this->language->getString('hi', 'default');
 			View::forge('welcome/index', $data);
 		}
 	}

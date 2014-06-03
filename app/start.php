@@ -13,8 +13,11 @@ $base = array(
 
 REQUIRE_ONCE 'config.php';
 
-if($_CONFIG['upload']['enable'] === true)
+if($_CONFIG['upload']['enabled'] === true)
 	array_push($base, "Upload/Upload.base.php");
+
+if($_CONFIG['language']['enabled'] === true)
+	array_push($base, "Language/Language.base.php");
 
 foreach ($base as $val)
 {
@@ -24,7 +27,10 @@ foreach ($base as $val)
 $Sec = new Security;
 if($_CONFIG['db']['enabled'] === true)
 	$DB = new Database($_CONFIG['db']['hostname'], $_CONFIG['db']['username'], $_CONFIG['db']['password'], $_CONFIG['db']['dbname']);
-$Upload = new Upload($_CONFIG);
+if($_CONFIG['upload']['enabled'] === true)
+	$Upload = new Upload($_CONFIG);
+if($_CONFIG['language']['enabled'] === true)
+	$Language = new Language($_CONFIG);
 
 $controllers = scandir('app/controllers');
 
