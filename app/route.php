@@ -29,12 +29,8 @@ foreach ($controllers as $val)
 			{
 				$value_pages_new = explode('.', $value_pages);
 				array_push($safe_pages, $value_pages_new[0]);
-<<<<<<< HEAD
 			}
 			if(in_array($params[1], $safe_pages) && $params[1] == $name_before)
-=======
-			}			if(in_array($params[1], $safe_pages) && $params[1] == $name_before)
->>>>>>> ae274e07434f94337e3dd927fb5f9dd7d77ec20b
 			{
 				REQUIRE_ONCE 'controllers/'.$val;
 				if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
