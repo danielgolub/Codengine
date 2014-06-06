@@ -19,6 +19,9 @@ if($_CONFIG['upload']['enabled'] === true)
 if($_CONFIG['language']['enabled'] === true)
 	array_push($base, "Language/Language.base.php");
 
+if($_CONFIG['api'] == 'enabled')
+	array_push($base, "API/API.base.php");
+
 foreach ($base as $val)
 {
 	REQUIRE_ONCE 'base/'.$val;
@@ -31,6 +34,8 @@ if($_CONFIG['upload']['enabled'] === true)
 	$Upload = new Upload($_CONFIG);
 if($_CONFIG['language']['enabled'] === true)
 	$Language = new Language($_CONFIG);
+if($_CONFIG['api'] == 'enabled')
+	$API = new API;
 
 $controllers = scandir('app/controllers');
 

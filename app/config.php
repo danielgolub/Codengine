@@ -5,6 +5,12 @@
 */
 
 $_CONFIG = array(
+
+	// First change the values below
+	"url" => "localhost/codengine", # without http://, or final slash
+	"route_controller_default" => "welcome", # without the prefix _controller
+	"route_enhanced_mode" => true, # for a seo friendly url (like welcome/upload) instead of index.php?page=welcome&action=upload
+
 	"db" => array(
 		"enabled" => true,
 		"hostname" => "localhost",
@@ -12,9 +18,6 @@ $_CONFIG = array(
 		"password" => "",
 		"dbname" => "test"
 	),
-	"url" => "localhost/codengine",
-	"route_controller_default" => "welcome",
-	"route_enhanced_mode" => true,
 	"upload" => array(
 		"enabled" => true,
 		"limits" => array(
@@ -31,6 +34,7 @@ $_CONFIG = array(
 		"enabled" => true,
 		"default" => "en"
 	),
+	"api" => "enabled"
 );
 
 ?>
