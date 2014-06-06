@@ -6,8 +6,9 @@
 
 class api
 {
-	public function transmit($url, $mode)
-	{
-
-	}
+	// Not ready yet!
+	// public function transmit($url, $mode)
+	// {
+		
+	// }
 }
