@@ -38,6 +38,8 @@ class controller_welcome
 					$data['error'] = View::success("File successfully uploaded!");
 			}
 			$data['title'] = 'Codengine &raquo; Upload file';
+			// Remove below
+			// $data['error'] = $this->upload->edit("assets/img/test/Codengine_3878ae98a6b55412eebb87d783dcc99aMDJJbmQ=.jpg", "grayscale");
 			View::forge('welcome/upload', $data);
 		}
 

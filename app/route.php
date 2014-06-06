@@ -20,7 +20,7 @@ foreach ($controllers as $val)
 		{
 			$request    = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 			$request    = str_replace($_CONFIG['url'], "", $request);
-			$params		= split("/", $request);
+			$params		= explode("/", $request);
 			// print_r($params);
 			$safe_pages_old = scandir("app/controllers");
 			$safe_pages_old = array_slice($safe_pages_old, 2);
