@@ -9,7 +9,7 @@ class controller_example
 	public function __construct($params)
 	{
 		// Setup what we need for this controller
-		// $Sec = new Security;
+		// $sec = new Security;
 		foreach ($params as $key => $val)
 		{
 			$this->{$key} = $val;

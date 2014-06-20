@@ -9,7 +9,7 @@ class controller_welcome
 	public function __construct($params)
 	{
 		// Setup what we need for this controller
-		// $Sec = new Security;
+		// $sec = new Security;
 		foreach ($params as $key => $val)
 		{
 			$this->{$key} = $val;
@@ -33,7 +33,7 @@ class controller_welcome
 			if(isset($_POST['submit']))
 			{
 				// to securely get post value, use:
-				// $this->Sec->_("name");
+				// $this->sec->_("name");
 
 				// Make sure img/test has 777 permission (chmod)
 				$newimg = $this->upload->generate($_FILES['img'], 'assets/img/test/', true);

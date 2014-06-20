@@ -33,13 +33,21 @@ foreach ($controllers as $val)
 			if(in_array($params[1], $safe_pages) && $params[1] == $name_before)
 			{
 				REQUIRE_ONCE 'controllers/'.$val;
-				if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
-					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language ));
-				else if($_CONFIG['upload']['enabled'] === true)
-					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
-				else
-					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
 
+				$load = array(
+					"sec" => $Sec,
+					"db" => $DB,
+					"params" => $params,
+				);
+
+				if($_CONFIG['language']['enabled'] == true)
+					$load['language'] = $Language;
+				if($_CONFIG['upload']['enabled'] === true)
+					$load['upload'] = $Upload;
+				if($_CONFIG['api'] == 'enabled')
+					$load['api'] = $API;
+
+				${$name} = new $name($load);
 				${$name}->action_index();
 				$loaded++;
 			}

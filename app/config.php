@@ -34,8 +34,7 @@ $_CONFIG = array(
 		"enabled" => true,
 		"default" => "en"
 	),
-	// API base class is not ready yet.
-	// "api" => "enabled"
+	"api" => "enabled"
 );
 
 ?>
