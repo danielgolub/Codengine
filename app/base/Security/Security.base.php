@@ -15,7 +15,7 @@ class Security
 	{
 		$first = md5(substr($str, strlen($str)/3));
 		$second = base64_encode(substr($str, strlen($str)/2));
-		$final = 'DanielGolub_HASH_'.$first.$second.md5('dasn2455643NSDGJ3qSJ4123SJD314');
+		$final = 'Codengine_HASH_'.$first.$second.md5('dasn2455643NSDGJ3qSJ4123SJD314');
 		$final = strip_tags(htmlspecialchars(trim($final)));
 		return $final;
 	}
