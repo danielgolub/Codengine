@@ -21,6 +21,15 @@ class controller_welcome
 		$data = array();
 		if($this->params[2] == 'upload')
 		{
+			// transfer file to remote address (ftp)
+			// $this->upload->remote_transfer(array(
+			// 	"file" => "assets/img/test/index.html",
+			// 	"ftp_server" => "remotehost.com",
+			// 	"ftp_username" => "daniel",
+			// 	"ftp_password" => "123123",
+			// 	"ftp_destination" => "/public_html/index.html"
+			// ));
+
 			if(isset($_POST['submit']))
 			{
 				// to securely get post value, use:

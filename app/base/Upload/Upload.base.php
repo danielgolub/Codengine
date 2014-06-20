@@ -57,7 +57,7 @@ class Upload
 			return 'error';
 	}
 
-	// FIXME: edit function almost done
+	// FIXME: edit function, some tuning still needed.
 	/*public function edit($file, $mode, $volume = 100)
 	{
 		$gd_ext = extension_loaded('gd');
@@ -114,6 +114,46 @@ class Upload
 		else
 			return 'gd not installed';
 	}*/
+
+	public function remote_transfer($details) {
+		if(is_array($details)) {
+			$file = $details['file'];
+			$server = $details['ftp_server'];
+			$username = $details['ftp_username'];
+			$password = $details['ftp_password'];
+			$destination = $details['ftp_destination'];
+
+			// set up basic connection
+			$conn_id = ftp_connect($server);
+			ftp_pasv($conn_id, true);
+
+			// login with username and password
+			$login_result = ftp_login($conn_id, $username, $password);
+
+			// check connection
+			if((!$conn_id) || (!$login_result)) {
+				return 'connection failed';
+			}
+
+			else
+			{
+				// upload the file
+				$upload = ftp_put($conn_id, $destination, $file, FTP_BINARY);
+
+				// check upload status
+				if(!$upload)
+					return 'upload failed';
+				else
+					return 'success';
+			}
+
+			// close the FTP stream
+			ftp_close($conn_id);
+		}
+
+		else
+			return 'details is not an array';
+	}
 }
 
 ?>
