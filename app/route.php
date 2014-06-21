@@ -65,12 +65,27 @@ foreach ($controllers as $val)
 				}
 				array_unshift($params, "");
 				REQUIRE_ONCE 'controllers/'.$val;
-				if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
-					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language ));
-				else if($_CONFIG['upload']['enabled'] === true)
-					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
-				else
-					${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
+				
+				$load = array(
+					"sec" => $Sec,
+					"db" => $DB,
+					"params" => $params,
+				);
+
+				if($_CONFIG['language']['enabled'] == true)
+					$load['language'] = $Language;
+				if($_CONFIG['upload']['enabled'] === true)
+					$load['upload'] = $Upload;
+				if($_CONFIG['api'] == 'enabled')
+					$load['api'] = $API;
+
+				${$name} = new $name($load);
+				// if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
+				// 	${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language ));
+				// else if($_CONFIG['upload']['enabled'] === true)
+				// 	${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload ));
+				// else
+				// 	${$name} = new $name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params ));
 
 				${$name}->action_index();
 				$loaded++;
@@ -83,12 +98,27 @@ foreach ($controllers as $val)
 if($loaded == 0)
 {
 	REQUIRE_ONCE 'controllers/'.$_CONFIG['route_controller_default'].'.controller.php';
-	if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
-		${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language, "date" => date('d/m/Y G:i'), "ip" => $_SERVER['REMOTE_ADDR'] ));
-	else if($_CONFIG['upload']['enabled'] === true)
-		${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload, "date" => date('d/m/Y G:i'), "ip" => $_SERVER['REMOTE_ADDR'] ));
-	else
-		${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params, "date" => date('d/m/Y G:i'), "ip" => $_SERVER['REMOTE_ADDR'] ));
+	
+	$load = array(
+		"sec" => $Sec,
+		"db" => $DB,
+		"params" => $params,
+	);
+
+	if($_CONFIG['language']['enabled'] == true)
+		$load['language'] = $Language;
+	if($_CONFIG['upload']['enabled'] === true)
+		$load['upload'] = $Upload;
+	if($_CONFIG['api'] == 'enabled')
+		$load['api'] = $API;
+
+	${$controller_default_name} = new $controller_default_name($load);
+	// if($_CONFIG['upload']['enabled'] === true && $_CONFIG['language']['enabled'] === true)
+	// 	${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload,"language" => $Language, "date" => date('d/m/Y G:i'), "ip" => $_SERVER['REMOTE_ADDR'] ));
+	// else if($_CONFIG['upload']['enabled'] === true)
+	// 	${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params,"upload" => $Upload, "date" => date('d/m/Y G:i'), "ip" => $_SERVER['REMOTE_ADDR'] ));
+	// else
+	// 	${$controller_default_name} = new $controller_default_name(array( "Sec" => $Sec,"DB" => $DB,"params" => $params, "date" => date('d/m/Y G:i'), "ip" => $_SERVER['REMOTE_ADDR'] ));
 	${$controller_default_name}->action_index();
 }
 

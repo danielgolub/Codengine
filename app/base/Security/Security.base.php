@@ -6,6 +6,8 @@
 
 class Security
 {
+	private static $secretfish = "dasn2455643NSD2GJ3qSJ4123SJD314";
+
 	public function _($str)
 	{
 		return strip_tags(htmlspecialchars(trim($_POST[$str])));
@@ -15,7 +17,7 @@ class Security
 	{
 		$first = md5(substr($str, strlen($str)/3));
 		$second = base64_encode(substr($str, strlen($str)/2));
-		$final = 'Codengine_HASH_'.$first.$second.md5('dasn2455643NSDGJ3qSJ4123SJD314');
+		$final = 'Codengine_HASH_'.$first.$second.md5(self::$secretfish);
 		$final = strip_tags(htmlspecialchars(trim($final)));
 		return $final;
 	}
