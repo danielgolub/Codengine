@@ -12,7 +12,7 @@ $_CONFIG = array(
 	"route_enhanced_mode" => true, # for a seo friendly url (like welcome/upload) instead of index.php?page=welcome&action=upload
 
 	"db" => array(
-		"enabled" => true,
+		"enabled" => false,
 		"hostname" => "localhost",
 		"username" => "root",
 		"password" => "",
