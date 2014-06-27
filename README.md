@@ -1,6 +1,7 @@
 Codengine
 ================
-MVC framework for creating easy, fast and efficient web apps.
+MVC framework for creating easy, fast and efficient web apps. <br />
+By Daniel Golub.
 
 ## Introduction
 Please first edit your config (app/config.php). Give chmod 777 permission to 'assets/img/test' and make sure '.htaccess' file exist in your server.
@@ -9,4 +10,5 @@ All your app's controllers are located in 'app/controllers/'. Your controller na
 ____________
 To load a view, please use: 'View::forge("welcome/index", $data);', while $data is an array which will contain anything you want to pass to the view.
 ____________
-Database usage documentation is located in: http://db.danielgolub.com
+Browse full documentation:
+https://github.com/danielgolub/Codengine/wiki/Documentation
