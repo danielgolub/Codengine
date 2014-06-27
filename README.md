@@ -1,6 +1,6 @@
 Codengine
 ================
-MVC framework for creating easy, fast and efficient web apps.
+MVC framework for creating easy, fast and efficient web apps. <br />
 By Daniel Golub.
 
 ## Introduction
