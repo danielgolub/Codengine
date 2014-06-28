@@ -34,6 +34,10 @@ class controller_welcome
 			{
 				// to securely get post value, use:
 				// $this->sec->_("name");
+				// $check = $this->sec->check(array(
+				// 	$name => "text",
+				// 	$something => "email",
+				// ));
 
 				// Make sure img/test has 777 permission (chmod)
 				$newimg = $this->upload->generate($_FILES['img'], 'assets/img/test/', true);
@@ -46,6 +50,7 @@ class controller_welcome
 				else
 					$data['error'] = View::success("File successfully uploaded!");
 			}
+
 			$data['title'] = 'Codengine &raquo; Upload file';
 			// Remove below
 			// $data['error'] = $this->upload->edit("assets/img/test/Codengine_3878ae98a6b55412eebb87d783dcc99aMDJJbmQ=.jpg", "grayscale");

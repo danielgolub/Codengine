@@ -22,6 +22,48 @@ class Security
 		return $final;
 	}
 
+	public function check($arr)
+	{
+		if(is_array($arr)) {
+			foreach ($arr as $val => $options)
+			{
+				if(empty($val)) {
+					return 'empty';
+				}
+
+				else {
+					switch ($options) {
+						case 'email':
+							if($this->validate($val, "email") === false)
+								return 'email not valid';
+							break;
+						case 'int':
+							if($this->validate($val, "int") === false)
+								return 'int not valid';
+							break;
+						case 'phone':
+							if($this->validate($val, "phone") === false)
+								return 'phone not valid';
+							break;
+						case 'ip':
+							if($this->validate($val, "ip") === false)
+								return 'ip not valid';
+							break;
+						case 'url':
+							if($this->validate($val, "url") === false)
+								return 'url not valid';
+							break;
+					}
+				}
+			}
+
+			return 'success';
+		}
+
+		else
+			return 'check() function require an array';
+	}
+
 	public function generate_session($arr)
 	{
 		if(is_array($arr))
