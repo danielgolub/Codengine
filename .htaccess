@@ -1,5 +1,7 @@
 Options +FollowSymLinks
 RewriteEngine On
+# If 500 error appear (internal server error), please uncomment the line below
+#RewriteBase /
  
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
