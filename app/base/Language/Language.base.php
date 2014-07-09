@@ -32,12 +32,14 @@ class Language
 			{
 				$value = explode('.', $val);
 				$value = $value[0];
-				REQUIRE_ONCE 'Stack/'.$value.'.stack.php';
-				$newstrval = "_strings_".$value;
-				if($str != 'all')
-					array_push($arr, ${$newstrval}[$str]);
-				else
-					$arr[$value] = ${$newstrval};
+				if($value == $language) {
+					REQUIRE_ONCE 'Stack/'.$value.'.stack.php';
+					$newstrval = "_strings_".$value;
+					if($str == 'all')
+						$arr = $$newstrval;
+					else
+						array_push($arr, ${$newstrval}[$str]);
+				}
 			}
 			return $arr;
 		}
