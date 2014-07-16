@@ -52,6 +52,23 @@ class Database extends mysqli
 		// $this->connect($host,$user,$password,$dbname);
 	}
 
+	public function set_encoding($str)
+	{
+		if(self::$connection_type == 'mysqli')
+		{
+			if(!$this->set_charset($str))
+				return false;
+		}
+
+		else if(self::$connection_type == 'mysql')
+		{
+			if(!mysql_set_charset($str))
+				return false;
+		}
+
+		return true;
+	}
+
 	public function make($type, $table, $what = '*')
 	{
 		switch ($type)
