@@ -188,6 +188,11 @@ class Database extends mysqli
 		self::$query .= " LIMIT ".$limit;
 	}
 
+	public function append($str)
+	{
+		self::$query .= $str;
+	}
+
 	public function execute($return = 'query')
 	{
 		$file = realpath(dirname(__FILE__)).'/db.log';
