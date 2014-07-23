@@ -183,6 +183,11 @@ class Database extends mysqli
 		self::$query .= " ORDER BY `".$parameter."` ".$list;
 	}
 
+	public function limit($limit)
+	{
+		self::$query .= " LIMIT ".$limit;
+	}
+
 	public function execute($return = 'query')
 	{
 		$file = realpath(dirname(__FILE__)).'/db.log';
