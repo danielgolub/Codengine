@@ -15,6 +15,7 @@ class Upload
 	{
 		$ext = explode(".", $file['name']);
 		$ext = end($ext);
+		$ext = strtolower($ext);
 		if(in_array($ext, $this->config['upload']['limits']['types']))
 		{
 			$size = $file['size'];

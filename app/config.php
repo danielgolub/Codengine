@@ -21,7 +21,7 @@ $_CONFIG = array(
 	"upload" => array(
 		"enabled" => true,
 		"limits" => array(
-			"size"  => 2048, // [MB]
+			"size"  => 2048, // [KB]
 			"types" => array(
 				"png",
 				"gif",
