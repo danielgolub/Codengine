@@ -27,9 +27,13 @@ foreach ($base as $val)
 	REQUIRE_ONCE 'base/'.$val;
 }
 
-$Sec = new Security;
 if($_CONFIG['db']['enabled'] === true)
+{
 	$DB = new Database($_CONFIG['db']['hostname'], $_CONFIG['db']['username'], $_CONFIG['db']['password'], $_CONFIG['db']['dbname']);
+	$Sec = new Security(array( "db" => $DB ));
+}
+else
+	$Sec = new Security;
 if($_CONFIG['upload']['enabled'] === true)
 	$Upload = new Upload($_CONFIG);
 if($_CONFIG['language']['enabled'] === true)

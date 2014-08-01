@@ -10,7 +10,10 @@ class Security
 
 	public function _($str)
 	{
-		return strip_tags(htmlspecialchars(trim($_POST[$str])));
+		if(isset($this->db))
+			return mysqli_real_escape_string($this->db, strip_tags(htmlspecialchars(trim($_POST[$str]))));
+		else
+			return strip_tags(htmlspecialchars(trim($_POST[$str])));
 	}
 
 	public function password($str)
@@ -137,6 +140,18 @@ html;
 				else
 					return false;
 				break;
+		}
+	}
+
+	public function __construct($params = NULL)
+	{
+		if($params != NULL) {
+			// Setup what we need for this controller
+			// $sec = new Security;
+			foreach ($params as $key => $val)
+			{
+				$this->{$key} = $val;
+			}
 		}
 	}
 }
