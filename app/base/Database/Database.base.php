@@ -183,9 +183,11 @@ class Database extends mysqli
 		self::$query .= " ORDER BY `".$parameter."` ".$list;
 	}
 
-	public function limit($limit)
+	public function limit($start, $end = NULL)
 	{
-		self::$query .= " LIMIT ".$limit;
+		self::$query .= " LIMIT ".$start;
+		if($end != NULL)
+			self::$query .= ", ".$end;
 	}
 
 	public function append($str)
