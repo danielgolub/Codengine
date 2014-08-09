@@ -1,0 +1,196 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var program = require('commander');
+var fs = require('fs');
+var colors = require('colors');
+
+program
+	.version('1.0.0')
+	.option('new controller {name} / new c {name}', 'Add a new Controller to your application')
+	.option('new view {folder/name} / new v {folder/name}', 'Add a new View to your application')
+	.option('new stack {name} / new s {name}', 'Add new Controller and its View (name/index.php) to your application')
+	.option('rename controller {oldname} {newname} / rename c {oldname}{newname}', 'Rename your controller')
+	.option('rename view {oldname} {newname} / rename v {oldname} {newname}', 'Rename your view')
+	.option('rename stack {oldname} {newname} / rename s {oldname} {newname}', 'Rename your stack')
+	.parse(process.argv);
+
+var arguments = process.argv.slice(2);
+// console.log(arguments[3]);
+
+if (arguments[0] == 'new')
+{
+	if(arguments[1] == 'controller' || arguments[1] == 'c')
+	{
+		if(arguments[2] != undefined) {
+			var default_controller = "<?php\n\
+/*\n\
+ * Codengine\n\
+ * FilePath: app/controllers/"+arguments[2]+".controller.php\n\
+*/\n\
+\n\
+class controller_"+arguments[2]+"\n\
+{\n\
+    public function __construct($params)\n\
+    {\n\
+        // Setup what we need for this controller\n\
+        // $sec = new Security;\n\
+        foreach ($params as $key => $val)\n\
+        {\n\
+            $this->{$key} = $val;\n\
+        }\n\
+    }\n\
+\n\
+    public function action_index()\n\
+    {\n\
+		\n\
+    }\n\
+}\n\
+\n\
+?>";
+			fs.writeFile("./app/controllers/"+arguments[2]+".controller.php", default_controller, function(err) {
+				if(err) {
+					console.log(err.red);
+				} else {
+					console.log("SUCCESS!".green);
+				}
+			});
+		}
+
+		else
+			console.log("ERROR:\nPlease specify a name for your controller".red);
+	}
+
+	else if (arguments[1] == 'view' || arguments[1] == 'v')
+	{
+		if(arguments[2] != undefined)
+		{
+			fs.mkdir("./app/views/"+arguments[2], 0755, function(err) {
+				if(err) {
+					console.log(err.red);
+				} else {
+					console.log("SUCCESS!".green);
+				}
+			});
+		}
+
+		else
+			console.log("ERROR:\nPlease specify a name for your view".red);
+	}
+
+	else if (arguments[1] == 'stack' || arguments[1] == 's')
+	{
+		if(arguments[2] != undefined)
+		{
+			var default_controller = "<?php\n\
+/*\n\
+ * Codengine\n\
+ * FilePath: app/controllers/"+arguments[2]+".controller.php\n\
+*/\n\
+\n\
+class controller_"+arguments[2]+"\n\
+{\n\
+    public function __construct($params)\n\
+    {\n\
+        // Setup what we need for this controller\n\
+        // $sec = new Security;\n\
+        foreach ($params as $key => $val)\n\
+        {\n\
+            $this->{$key} = $val;\n\
+        }\n\
+    }\n\
+\n\
+    public function action_index()\n\
+    {\n\
+		\n\
+    }\n\
+}\n\
+\n\
+?>";
+			fs.writeFile("./app/controllers/"+arguments[2]+".controller.php", default_controller, function(err) {
+				if(err) {
+					console.log(err.red);
+				}
+			});
+			fs.mkdir("./app/views/"+arguments[2], 0755, function(err) {
+				if(err) {
+					console.log(err.red);
+				} else {
+					console.log("SUCCESS!".green);
+				}
+			});
+		}
+
+		else
+			console.log("ERROR:\nPlease specify a name for your stack".red);
+	}
+
+	else
+	{
+		console.log("Write ./engine -help for avilable commands");
+	}
+}
+
+else if (arguments[0] == 'rename')
+{
+	if(arguments[1] == 'controller' || arguments[1] == 'c')
+	{
+		if(arguments[2] != undefined && arguments[3] != undefined) {
+			fs.rename("./app/controllers/"+arguments[2]+".controller.php", "./app/controllers/"+arguments[3]+".controller.php", function(err) {
+				if(err) {
+					console.log(err.red);
+				} else {
+					console.log("SUCCESS!".green);
+				}
+			});
+		}
+
+		else
+			console.log("ERROR:\nPlease specify your controller old name and new name".red);
+	}
+
+	if(arguments[1] == 'view' || arguments[1] == 'v')
+	{
+		if(arguments[2] != undefined && arguments[3] != undefined) {
+			fs.rename("./app/views/"+arguments[2], "./app/views/"+arguments[3], function(err) {
+				if(err) {
+					console.log(err.red);
+				} else {
+					console.log("SUCCESS!".green);
+				}
+			});
+		}
+
+		else
+			console.log("ERROR:\nPlease specify your view old name and new name".red);
+	}
+
+	if(arguments[1] == 'stack' || arguments[1] == 's')
+	{
+		if(arguments[2] != undefined && arguments[3] != undefined) {
+			fs.rename("./app/controllers/"+arguments[2]+".controller.php", "./app/controllers/"+arguments[3]+".controller.php", function(err) {
+				if(err) {
+					console.log(err.red);
+				}
+			});
+			fs.rename("./app/views/"+arguments[2], "./app/views/"+arguments[3], function(err) {
+				if(err) {
+					console.log(err.red);
+				} else {
+					console.log("SUCCESS!".green);
+				}
+			});
+		}
+
+		else
+			console.log("ERROR:\nPlease specify your stack old name and new name".red);
+	}
+}
+
+else
+{
+	console.log("Write ./engine -help for avilable commands");
+}
