@@ -11,9 +11,9 @@ var colors = require('colors');
 program
 	.version('1.0.0')
 	.option('new controller {name} / new c {name}', 'Add a new Controller to your application')
-	.option('new view {folder/name} / new v {folder/name}', 'Add a new View to your application')
-	.option('new stack {name} / new s {name}', 'Add new Controller and its View (name/index.php) to your application')
-	.option('rename controller {oldname} {newname} / rename c {oldname}{newname}', 'Rename your controller')
+	.option('new view {folder} / new v {folder}', 'Add a new View to your application')
+	.option('new stack {name} / new s {name}', 'Add new Controller and its View to your application')
+	.option('rename controller {oldname} {newname} / rename c {oldname} {newname}', 'Rename your controller')
 	.option('rename view {oldname} {newname} / rename v {oldname} {newname}', 'Rename your view')
 	.option('rename stack {oldname} {newname} / rename s {oldname} {newname}', 'Rename your stack')
 	.parse(process.argv);
