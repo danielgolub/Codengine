@@ -8,6 +8,10 @@ var program = require('commander');
 var fs = require('fs');
 var colors = require('colors');
 
+/**
+ * Available actions (./engine -help)
+ */
+
 program
 	.version('1.0.0')
 	.option('new controller {name} / new c {name}', 'Add a new Controller to your application')
@@ -19,14 +23,12 @@ program
 	.parse(process.argv);
 
 var arguments = process.argv.slice(2);
-// console.log(arguments[3]);
 
-if (arguments[0] == 'new')
-{
-	if(arguments[1] == 'controller' || arguments[1] == 'c')
-	{
-		if(arguments[2] != undefined) {
-			var default_controller = "<?php\n\
+/**
+ * File contents
+ */
+
+var default_controller = "<?php\n\
 /*\n\
  * Codengine\n\
  * FilePath: app/controllers/"+arguments[2]+".controller.php\n\
@@ -51,6 +53,13 @@ class controller_"+arguments[2]+"\n\
 }\n\
 \n\
 ?>";
+
+
+if (arguments[0] == 'new')
+{
+	if(arguments[1] == 'controller' || arguments[1] == 'c')
+	{
+		if(arguments[2] != undefined) {
 			fs.writeFile("./app/controllers/"+arguments[2]+".controller.php", default_controller, function(err) {
 				if(err) {
 					console.log(err.red);
@@ -85,31 +94,6 @@ class controller_"+arguments[2]+"\n\
 	{
 		if(arguments[2] != undefined)
 		{
-			var default_controller = "<?php\n\
-/*\n\
- * Codengine\n\
- * FilePath: app/controllers/"+arguments[2]+".controller.php\n\
-*/\n\
-\n\
-class controller_"+arguments[2]+"\n\
-{\n\
-    public function __construct($params)\n\
-    {\n\
-        // Setup what we need for this controller\n\
-        // $sec = new Security;\n\
-        foreach ($params as $key => $val)\n\
-        {\n\
-            $this->{$key} = $val;\n\
-        }\n\
-    }\n\
-\n\
-    public function action_index()\n\
-    {\n\
-		\n\
-    }\n\
-}\n\
-\n\
-?>";
 			fs.writeFile("./app/controllers/"+arguments[2]+".controller.php", default_controller, function(err) {
 				if(err) {
 					console.log(err.red);
