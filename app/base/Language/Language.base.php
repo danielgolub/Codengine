@@ -33,8 +33,8 @@ class Language
 				$value = explode('.', $val);
 				$value = $value[0];
 				if($value == $language) {
-					REQUIRE_ONCE 'Stack/'.$value.'.stack.php';
-					$newstrval = "_strings_".$value;
+					REQUIRE_ONCE 'Stack/'.$language.'.stack.php';
+					$newstrval = "_strings_".$language;
 					if($str == 'all')
 						$arr = $$newstrval;
 					else
