@@ -4,7 +4,5 @@
 */
 
 $(document).ready(function(){
-	// CKEDITOR.replace( 'content', {
-	// 	// Options...
-	// });
+	console.log("Codengine is ready to use!");
 });
