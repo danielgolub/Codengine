@@ -19,8 +19,12 @@ foreach ($controllers as $val)
 		if($_CONFIG['route_enhanced_mode'] === true)
 		{
 			$request    = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-			$request    = str_replace($_CONFIG['url'], "", $request);
+			$request    = strip_tags(addslashes(str_replace($_CONFIG['url'], "", $request)));
 			$params		= explode("/", $request);
+			foreach ($params as $param) {
+				if(!empty($param) && !ctype_alnum($param))
+					die("HTTP Request param is not valid");
+			}
 			// print_r($params);
 			$safe_pages_old = scandir("app/controllers");
 			$safe_pages_old = array_slice($safe_pages_old, 2);
@@ -57,7 +61,13 @@ foreach ($controllers as $val)
 		{
 			if($_GET['page'] == $name_before)
 			{
-				$params_old = $_GET;
+				$params_old    = strip_tags(addslashes(str_replace($_CONFIG['url'], "", $_GET)));
+				$params_old	   = explode("/", $params_old);
+				foreach ($params_old as $param) {
+					if(!empty($param) && !ctype_alnum($param))
+						die("HTTP Request param is not valid");
+				}
+				// $params_old = $_GET;
 				$params = array();
 				foreach ($params_old as $k => $v)
 				{
