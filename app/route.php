@@ -22,7 +22,7 @@ foreach ($controllers as $val)
 			$request    = strip_tags(addslashes(str_replace($_CONFIG['url'], "", $request)));
 			$params		= explode("/", $request);
 			foreach ($params as $param) {
-				if(!empty($param) && !ctype_alnum($param))
+				if(!empty($param) && !ctype_alnum(str_replace([ "_","-"," " ], "", $param)))
 					die("HTTP Request param is not valid");
 			}
 			// print_r($params);
@@ -64,7 +64,7 @@ foreach ($controllers as $val)
 				$params_old    = strip_tags(addslashes(str_replace($_CONFIG['url'], "", $_GET)));
 				$params_old	   = explode("/", $params_old);
 				foreach ($params_old as $param) {
-					if(!empty($param) && !ctype_alnum($param))
+					if(!empty($param) && !ctype_alnum(str_replace([ "_","-"," " ], "", $param)))
 						die("HTTP Request param is not valid");
 				}
 				// $params_old = $_GET;
