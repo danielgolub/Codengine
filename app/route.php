@@ -28,7 +28,18 @@ else if(isset($_GET['page']) && in_array($_GET['page'].'.controller.php', $contr
 	array_unshift($params, "");
 }
 
-// then we need to include the controller based on the url first parameter (welcome)
+// if you have a user system you rely on you can deny access to all/specific controllers here.
+
+// // check if user has credentials
+// if(isset($_SESSION['username']) && isset($_SESSION['password']))
+// 		$DB->make('select', "Users"); // ... continue according to your database
+// else
+// 	$user = false;
+
+
+// if($user !== true) { ......
+
+// now we need to include the controller based on the url's first parameter (welcome)
 if(in_array($params[1].".controller.php", $controllers))
 {
 	REQUIRE_ONCE 'controllers/'.$params[1].".controller.php";

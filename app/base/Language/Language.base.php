@@ -16,10 +16,7 @@ class Language
 		if($language == 'default')
 		{
 			REQUIRE_ONCE "Stack/".$this->config['language']['default'].".stack.php";
-			if($str != 'all')
-				return ${"_strings_".$this->config['language']['default']}[$str];
-			else
-				return ${"_strings_".$this->config['language']['default']};
+			return ( ($str != 'all') ) ? ${"_strings_".$this->config['language']['default']}[$str] : ${"_strings_".$this->config['language']['default']};
 		}
 
 		else if($language != 'all' && $language != '*') {
