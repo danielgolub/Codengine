@@ -15,39 +15,32 @@ class Language
 	{
 		if($language == 'default')
 		{
-			REQUIRE_ONCE 'Stack/'.$this->config['language']['default'].'.stack.php';
-			$default_lang = "_strings_".$this->config['language']['default'];
+			REQUIRE_ONCE "Stack/".$this->config['language']['default'].".stack.php";
 			if($str != 'all')
-				return ${$default_lang}[$str];
+				return ${"_strings_".$this->config['language']['default']}[$str];
 			else
-				return ${$default_lang};
+				return ${"_strings_".$this->config['language']['default']};
+		}
+
+		else if($language != 'all' && $language != '*') {
+			REQUIRE_ONCE 'app/base/Language/Stack/'.$language.".stack.php";
+			return ( $str == 'all' || $str == '*' ) ? ${"_strings_".$language} : ${"_strings_".$language}[$str];
 		}
 
 		else
 		{
-			$languages = scandir("app/base/Language/Stack");
-			$languages = array_slice($languages, 2);
+			$languages = array_filter(scandir("app/base/Language/Stack"), function($item) {
+				return !is_dir('app/base/Language/Stack/' . $item);
+			});
 			$arr = array();
 			foreach ($languages as $val)
 			{
-				$value = explode('.', $val);
-				$value = $value[0];
-				if($value == $language) {
-					REQUIRE_ONCE 'Stack/'.$language.'.stack.php';
-					$newstrval = "_strings_".$language;
-					if($str == 'all')
-						$arr = $$newstrval;
-					else
-						array_push($arr, ${$newstrval}[$str]);
-				}
+				REQUIRE_ONCE "Stack/".$val;
+				$name = reset(explode(".", $val));
+				$arr[$name] = ( $str == 'all' || $str == '*' ) ? ${"_strings_".$name} : ${"_strings_".$name}[$str];
 			}
 			return $arr;
 		}
-	}
-
-	public function setString()
-	{
-
 	}
 }
 

@@ -11,19 +11,17 @@ class View
 {
 	public static function forge($location, $data = NULL, $template = true)
 	{
-		$location = $location.'.php';
-		if($data != NULL)
-			extract($data);
+		($data != NULL) ? extract($data) : false;
 		if($template === true)
 			REQUIRE_ONCE 'app/views/header.php';
-		REQUIRE_ONCE 'app/views/'.$location;
+		REQUIRE_ONCE "app/views/$location.php";
 		if($template === true)
 			REQUIRE_ONCE 'app/views/footer.php';
 	}
 
 	public static function error($str)
 	{
-		$msg = <<<html
+		return <<<html
 
 <div class="alert alert-danger">
 	<h4>An error occurred</h4>
@@ -31,12 +29,11 @@ class View
 </div>
 
 html;
-		return $msg;
 	}
 
 	public static function success($str)
 	{
-		$msg = <<<html
+		return <<<html
 
 <div class="alert alert-success">
 	<h4>Success!</h4>
@@ -45,7 +42,6 @@ html;
 <meta http-equiv="refresh" content="3;" />
 
 html;
-		return $msg;
 	}
 
 	public static function display_menu($mode = 'li')

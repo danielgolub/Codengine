@@ -4,9 +4,8 @@
  * FilePath: app/start.php
 */
 
-// Load app core files
+// Load app core classes
 $base = array(
-	"Database/Database.base.php",
 	"Security/Security.base.php",
 	"View/View.base.php",
 );
@@ -29,6 +28,7 @@ foreach ($base as $val)
 
 if($_CONFIG['db']['enabled'] === true)
 {
+	REQUIRE_ONCE "base/Database/Database.base.php";
 	$DB = new Database($_CONFIG['db']['hostname'], $_CONFIG['db']['username'], $_CONFIG['db']['password'], $_CONFIG['db']['dbname']);
 	$Sec = new Security(array( "db" => $DB ));
 }
@@ -41,7 +41,9 @@ if($_CONFIG['language']['enabled'] === true)
 if($_CONFIG['api'] == 'enabled')
 	$API = new API;
 
-$controllers = scandir('app/controllers');
+$controllers = array_filter(scandir('app/controllers'), function($item) {
+	return !is_dir('app/controllers/' . $item);
+});
 
 REQUIRE_ONCE 'route.php';
 
