@@ -28,6 +28,9 @@ else if(isset($_GET['page']) && in_array($_GET['page'].'.controller.php', $contr
 	array_unshift($params, "");
 }
 
+// push url parameters to the registry file
+$registry->set("params", $params);
+
 // if you have a user system you rely on you can deny access to all/specific controllers here.
 
 // // check if user has credentials
@@ -40,29 +43,12 @@ else if(isset($_GET['page']) && in_array($_GET['page'].'.controller.php', $contr
 // if($user !== true) { ......
 
 // now we need to include the controller based on the url's first parameter (welcome)
-if(in_array($params[1].".controller.php", $controllers))
+if(is_array($controllers) && in_array($params[1].".controller.php", $controllers))
 {
-	REQUIRE_ONCE 'controllers/'.$params[1].".controller.php";
-
-	// default classes to pass to the controller
-	$load = array(
-		"sec" => $Sec, // security
-		"db" => $DB, // database
-		"params" => $params, // url parameters
-	);
-
-	// additional classes to pass to the controller only if they are enabled in /app/config.php
-	if($_CONFIG['language']['enabled'] == true)
-		$load['language'] = $Language;
-	if($_CONFIG['upload']['enabled'] === true)
-		$load['upload'] = $Upload;
-	if($_CONFIG['api'] == 'enabled')
-		$load['api'] = $API;
-
-	// then run the controller and initiate action_index
-	$name = "controller_".$params[1];
-	$$name = new $name($load);
-	$$name->action_index();
+	require_once 'app/controllers/'.$params[1].".controller.php";
+	$new = 'controller_'.$params[1];
+	$registry->set($params[1], new $new);
+	$registry->get($params[1])->action_index();
 }
 
 else // 404 - controller not found - redirect to home page

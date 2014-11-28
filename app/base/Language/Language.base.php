@@ -6,9 +6,11 @@
 
 class Language
 {
-	public function __construct($_CONFIG)
+	private $config;
+
+	public function __construct($param)
 	{
-		$this->config = $_CONFIG;
+		$this->config = $param;
 	}
 
 	public function getString($str = 'all', $language = 'default')

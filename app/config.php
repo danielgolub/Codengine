@@ -34,7 +34,7 @@ $_CONFIG = array(
 		"enabled" => true,
 		"default" => "en"
 	),
-	"api" => "disabled"
+	"api" => false,
 );
 
 ?>

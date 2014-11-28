@@ -6,20 +6,10 @@
 
 class controller_example
 {
-	public function __construct($params)
-	{
-		// Setup what we need for this controller
-		// $sec = new Security;
-		foreach ($params as $key => $val)
-		{
-			$this->{$key} = $val;
-		}
-	}
-
 	public function action_index()
 	{
 		$data = array();
-		$data['title'] = 'Codengine &raquo; Welcome :)';
+		$data['title'] = 'Codengine &raquo; Example';
 		View::forge("example/index", $data, false);
 	}
 }

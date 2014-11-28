@@ -6,14 +6,10 @@
 
 class controller_welcome
 {
-	public function __construct($params)
+	public function __construct()
 	{
-		// Setup what we need for this controller
-		// $sec = new Security;
-		foreach ($params as $key => $val)
-		{
-			$this->{$key} = $val;
-		}
+		$registry = Registry::getInstance();
+		foreach (reset($registry) as $key => $value) { $this->{$key} = $value; }
 	}
 
 	public function action_index()
@@ -60,7 +56,8 @@ class controller_welcome
 		else
 		{
 			$data['title'] = 'Codengine &raquo; Welcome :)';
-			$data['strings'] = $this->language->getString('hi', 'default');
+			$registry = Registry::getInstance();
+			$data['strings'] = $registry->get('language')->getString('hi', 'default');
 			View::forge('welcome/index', $data);
 		}
 	}

@@ -36,15 +36,11 @@ var default_controller = "<?php\n\
 \n\
 class controller_"+arguments[2]+"\n\
 {\n\
-    public function __construct($params)\n\
-    {\n\
-        // Setup what we need for this controller\n\
-        // $sec = new Security;\n\
-        foreach ($params as $key => $val)\n\
-        {\n\
-            $this->{$key} = $val;\n\
-        }\n\
-    }\n\
+	public function __construct()\n\
+	{\n\
+		$registry = Registry::getInstance();\n\
+		foreach (reset($registry) as $key => $value) { $this->{$key} = $value; }\n\
+	}\n\
 \n\
     public function action_index()\n\
     {\n\

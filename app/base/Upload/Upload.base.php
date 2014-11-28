@@ -6,11 +6,6 @@
 
 class Upload
 {
-	public function __construct($config)
-	{
-		$this->config = $config;
-	}
-
 	public function generate($file, $path, $rename = false)
 	{
 		$ext = explode(".", $file['name']);

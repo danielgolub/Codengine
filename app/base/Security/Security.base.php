@@ -142,18 +142,6 @@ html;
 				break;
 		}
 	}
-
-	public function __construct($params = NULL)
-	{
-		if($params != NULL) {
-			// Setup what we need for this controller
-			// $sec = new Security;
-			foreach ($params as $key => $val)
-			{
-				$this->{$key} = $val;
-			}
-		}
-	}
 }
 
 ?>
