@@ -53,24 +53,10 @@ if(is_array($controllers) && in_array($params[1].".controller.php", $controllers
 
 else // 404 - controller not found - redirect to home page
 {
-	REQUIRE_ONCE 'controllers/'.$_CONFIG['route_controller_default'].'.controller.php';
-	
-	$load = array(
-		"sec" => $Sec,
-		"db" => $DB,
-		"params" => $params,
-	);
-
-	if($_CONFIG['language']['enabled'] == true)
-		$load['language'] = $Language;
-	if($_CONFIG['upload']['enabled'] === true)
-		$load['upload'] = $Upload;
-	if($_CONFIG['api'] == 'enabled')
-		$load['api'] = $API;
-
-	$default = 'controller_'.$_CONFIG['route_controller_default'];
-	$$default = new $default($load);
-	$$default->action_index();
+	require_once 'app/controllers/'.$_CONFIG['route_controller_default'].".controller.php";
+	$new = 'controller_'.$_CONFIG['route_controller_default'];
+	$registry->set($_CONFIG['route_controller_default'], new $new);
+	$registry->get($_CONFIG['route_controller_default'])->action_index();
 }
 
 ?>
