@@ -29,6 +29,7 @@ try {
 	if($_CONFIG['db']['enabled'] === true) { // load db if enabled
 		require_once 'app/base/Database/Database.base.php';
 		$registry->set("db", new Database($_CONFIG['db']['hostname'], $_CONFIG['db']['username'], $_CONFIG['db']['password'], $_CONFIG['db']['dbname']));
+        $DB = $registry->get("db");
 	}
 
 	if($_CONFIG['upload']['enabled'] === true) { // load file uploading if enabled
